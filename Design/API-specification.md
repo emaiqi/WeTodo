@@ -44,7 +44,7 @@ RequestType: post
 # todolist
 
 ### 请求服务器端的todolist数据
-Api: http://todo.aozi.co/api/todolist    
+Api: https://todo.aozi.co/api/todolist    
 Request Type: post    
 
     var RequestPostJson = {
@@ -105,7 +105,7 @@ Request Type: post
 
 # login
 ###请求服务器端的login数据
-Api: http://todo.aozi.co/api/login        
+Api: https://todo.aozi.co/api/login        
 Request Type: post    
 
     var RequestPostJson = {
