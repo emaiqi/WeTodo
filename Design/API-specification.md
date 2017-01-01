@@ -155,16 +155,16 @@ Request Type: post
         Msg:'成功',
         Status:200,
         Time: 1483234168570,
-        Data:{
+        Data:{ 
             RequestTime: "1483234168570",   //请求时发送的 Data.RequestTime
             Code: "CodeString" //请求时发送的Code
         }
-    }
+    }  
     
 或    
 
     var ResponsePostJson = {
-        Msg:'服务器错误',
+        Msg:'服务器错误',
         Status:500,
         Time: 1483234168570,
         Data:{
@@ -173,10 +173,11 @@ Request Type: post
         }
     }
     
-或     
+或
+
 
     var ResponsePostJson = {
-        Msg:'微信服务器错误[40029:invalid code]',
+        Msg:'微信服务器错误[40029:invalid code]',
         Status:500,
         Time: 1483234168570,
         Data:{
@@ -184,16 +185,16 @@ Request Type: post
             Code: "CodeString" //请求时发送的Code
         }
     }
-    
+
 或当正确未提交Code参数时    
 
-    var ResponsePostJson = {
-        Msg:'登录失败[参数错误]',
+    var ResponsePostJson = {
+        Msg:'登录失败[参数错误]',
         Status:400,
         Time: 1483234168570,
         Data:{
-            RequestTime: "1483234168570",   //请求时发送的 Data.RequestTime
-            //请求时未发送Code
+        RequestTime: "1483234168570",   //请求时发送的 Data.RequestTime
+                  //请求时未发送Code
         }
     }
 
