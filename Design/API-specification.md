@@ -5,7 +5,7 @@ RequestType: post
 只接受Post请求    
 
 ### 发起请求的JSON结构 （CreateItem）
-   
+
 
     var RequestPostJson = {
         Time: 1483234168570,        //发送请求的时间, 在wx.request时调用 getApp().getTimeStamp()获得
@@ -30,8 +30,6 @@ RequestType: post
     }
 
 说明：新增todoitem时，Title为必须项，其他参数可留空；修改todoitem时必须提交Guid，且同时至少提交一个可选项
-
-
 
 ### 服务端返回的JSON结构 (ResponseToCreateItem)
     var ResponsePostJson = {
