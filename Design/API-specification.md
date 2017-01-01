@@ -1,10 +1,13 @@
+# todoitem
 ### 发起请求的JSON结构 （CreateItem）
+Api: https://todo.aozi.co/api/todoitem    
+RequestType: post    
+
     var RequestPostJson = {
-        Time: "2016-12-31T16:30:00.050Z",
-        UserId:"UserOpenId",
+        Time: 1483234168570,
         
         Data: {
-            RequestTime: "2016-12-31T16:30:00.050Z",    
+            RequestTime: 1483234168270,    
             Data: [
                 {
                     Title":     "我是第一条TODO",
@@ -12,8 +15,10 @@
                     State:      0,
                     Type:       "0-Normal",
                     Guid":      null,
-                    CreateTime: "2016-12-31T16:29:00.000Z",
-                    AlertTime:  "2017-01-01T12:00:00.000Z",
+                    CreateTime: 1483234168570,
+                    AlertTime:  1483234268570,
+                    StartTime:  1483250000000,    
+                    EndTime:    1483260000000,    
                 }
             ]
         },
@@ -23,26 +28,30 @@
     var ResponsePostJson = {
         Msg: "成功",
         Status: 200,
-        Time: "2016-12-31T16:30:00.250Z",
+        Time: 1483234168570,
         Data: {
-            RequestTime: "2016-12-31T16:30:00.050Z",
+            RequestTime: 1483234168570,
             Data: [
                 {
                     Guid: "服务器端生成一个guid，赋给'我是第一条TODO'",
                     Title: "我是第一条TODO",
-                    "CreateTime": "2016-12-31T16:29:00.000Z",
+                    "CreateTime": 1483234168570,
                 }
             ],
         }
     }
 
+# todolist
+
 ### 请求服务器端的todolist数据
+Api: http://todo.aozi.co/api/todolist    
+Request Type: post    
+
     var RequestPostJson = {
-        Time: "2016-12-31T16:30:00.050Z",
-        UserId:"UserOpenId",
+        Time: 1483260000000,
         
         Data: {
-            RequestTime: "2016-12-31T16:30:00.050Z",    
+            RequestTime: 1483260000000,    
             ActionType:  "GET_USER_DATA_ALL", // 返回所有用户的数据            
         }
     };
@@ -51,10 +60,10 @@
     var ResponseJson = {
         Msg: "成功",
         Status: 200,
-        Time: "2016-12-31T16:30:00.250Z",
+        Time: 1483260000000,
 
         Data: {
-            RequestTime: "2016-12-31T16:30:00.050Z",
+            RequestTime: 1483260000000,
 
             Data: [
                 {
@@ -63,8 +72,10 @@
                     State:      0,
                     Type:       "Normal",
                     Guid":      "streesdjfvmlknelknsdklnlkwne",
-                    CreateTime: "2016-12-31T16:29:00.000Z",
-                    AlertTime:  "2017-01-01T12:00:00.000Z",
+                    CreateTime: 1483234168570,
+                    AlertTime:  1483234268570,
+                    StartTime:  1483250000000,    
+                    EndTime:    1483260000000,
                 },
                 {
                     Title":     "我是第二条TODO",
@@ -72,8 +83,10 @@
                     State:      0,
                     Type:       "Normal",
                     Guid":      "streesdjfvmlknelknsdklnlkwne",
-                    CreateTime: "2016-12-31T16:29:00.000Z",
-                    AlertTime:  "2017-01-01T12:00:00.000Z",
+                    CreateTime: 1483234168570,
+                    AlertTime:  1483234268570,
+                    StartTime:  1483250000000,    
+                    EndTime:    1483260000000,
                 },
                 {
                     Title":     "我是第3条TODO",
@@ -81,19 +94,46 @@
                     State:      1, // >> 0: Unchecked 1: Checked
                     Type:       "Normal",
                     Guid":      "streesdjfvmlknelknsdklnlkwne",
-                    CreateTime: "2016-12-31T16:29:00.000Z",
-                    AlertTime:  "2017-01-01T12:00:00.000Z",
+                    CreateTime: 1483234168570,
+                    AlertTime:  1483234268570,
+                    StartTime:  1483250000000,    
+                    EndTime:    1483260000000,
                 }
             ],
         }
     }
 
-### 各个字段的详细说明
-+ Time: "2016-12-31T16:30:00.050Z"    
-    每个req和res都有一个Time字段，表示该请求的生成的事情，或者发出的时间
+# login
+###请求服务器端的login数据
+Api: http://todo.aozi.co/api/login        
+Request Type: post    
 
-+ UserId: "UserOpenId"    
-    用户的OpenId或者后端生成的用户的id
+    var RequestPostJson = {
+        Time: 1483260000000,
+        
+        Data: {
+            RequestTime: 1483260000000,    
+            Code:  "CodeString-from-wx.login()",             
+        }
+    };
+
+### 返回的todolist数据
+
+    var ResponsePostJson = {
+        Msg:'成功',
+        Status:200,
+        Time: 1483234168570,
+        Data:{
+            RequestTime: "1483234168570",   //请求时发送的 Data.RequestTime
+            Code: "CodeString" //请求时发送的Code
+        }
+    }
+
+    
+    
+### 各个字段的详细说明
++ Time: 1483260000000    
+    每个req和res都有一个Time字段，表示该请求的生成的事情，或者发出的时间
 
 + Msg: "成功" (res才有)    
     表示当前请求的信息。可选值有`["成功", "失败", "数据错误", "参数错误"]`
@@ -105,7 +145,7 @@
 + Data: {}    
     提交或获取到的数据
             
-    + RequestTime: "2016-12-31T16:30:00.050Z"    
+    + RequestTime: 1483260000000    
     请求的时间。用来对对应的请求应答进行分辨，方便create数据时，给客户端的todoitem加上guid
 
     + Data: []    
@@ -126,7 +166,11 @@
         + Guid: null    
         Todolist的Guid，创建时没有，提交给后端后，由后端生成并返回给前端。    
         每次的操作更新，都依赖于这个Guid。
-        + CreateTime: "2016-12-31T16:29:00.000Z"    
+        + CreateTime: 1483260000000    
         Todoitem的创建时间
-        + (可选) AlertTime:  "2017-01-01T12:00:00.000Z"    
+        + (可选) AlertTime:  1483260000000    
         Todoitem的提醒时间。如果没有这个字段，或者字段为false，就为正常的记事。
+        + (可选) StartTime： 1483260000000
+        Todoitem开始时间。
+        + (可选) Endtme： 1483260000000
+        Todoitem 结束时间。
