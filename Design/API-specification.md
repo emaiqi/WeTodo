@@ -120,34 +120,35 @@ Request Type: post
 ###如何获取Code
 
 在app.js定义onLaunch，getTimeStamp，加入wx.login()    
-  onLaunch: function () {
+
+    onLaunch: function () {
     //调用API从本地缓存中获取数据
-    var that=this;//important
+    var that=this;//important
     wx.login({
-      success: function(res) {
+        success: function(res) {
         if (res.code) {
-          //发起网络请求
-          wx.request({
-            url: 'https://todo.aozi.co/api/login', //API
-            method:'POST',  //必须POST
-            data: {
-              Time: that.getTimeStamp(),
-              Data:{
-                RequestTime: that.getTimeStamp(),
-                Code: res.code
-              }
-            }
-          })
+            //发起网络请求
+            wx.request({
+                url: 'https://todo.aozi.co/api/login', //API
+                method:'POST',  //必须POST
+                data: {
+                    Time: that.getTimeStamp(),
+                    Data:{
+                    RequestTime: that.getTimeStamp(),
+                    Code: res.code
+                    }
+                }
+            })
         } else {
-          console.log('获取用户登录态失败！' + res.errMsg)
+            console.log('获取用户登录态失败！' + res.errMsg)
         }
-      }
+        }
     });
-  },
-  //返回当前时间戳
-  getTimeStamp:function(){
-    return new Date().getTime();
-  },
+    },
+    //返回当前时间戳
+    getTimeStamp:function(){
+        return new Date().getTime();
+    },
 
 ### 返回的login数据
 
