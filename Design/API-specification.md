@@ -12,7 +12,7 @@ RequestType: post
         ActionType: "Create",       //必须，可选值有：["Create","Update","Delete"]
         Data: {
             
-            RequestTime: 1483234168270,         //在客户端创建todoitem时生成，调用getApp().getTimeStamp()获得
+            RequestTime: 1483234169999,         //在客户端创建todoitem时生成，调用getApp().getTimeStamp()获得
             Data: [
                 {
                     Title":     "我是第一条TODO",    //必须，非空，输入长度80个汉字以内
@@ -38,7 +38,7 @@ RequestType: post
         Time: 1483234168570,        //服务器输出时间，毫秒数
         ActionType: "Create",       //请求时发送的，原样返回
         Data: {
-            RequestTime: 1483234168570,     //客户端交数据时间，毫秒数
+            RequestTime: 1483234169999,     //客户端交数据时间，毫秒数
             Data: [
                 {
                     Title":     "我是第一条TODO",   
