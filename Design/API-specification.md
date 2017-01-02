@@ -117,6 +117,38 @@ Request Type: post
         }
     };
 
+###如何获取Code
+
+在app.js定义onLaunch，getTimeStamp，加入wx.login()    
+  onLaunch: function () {
+    //调用API从本地缓存中获取数据
+    var that=this;//important
+    wx.login({
+      success: function(res) {
+        if (res.code) {
+          //发起网络请求
+          wx.request({
+            url: 'https://todo.aozi.co/api/login', //API
+            method:'POST',  //必须POST
+            data: {
+              Time: that.getTimeStamp(),
+              Data:{
+                RequestTime: that.getTimeStamp(),
+                Code: res.code
+              }
+            }
+          })
+        } else {
+          console.log('获取用户登录态失败！' + res.errMsg)
+        }
+      }
+    });
+  },
+  //返回当前时间戳
+  getTimeStamp:function(){
+    return new Date().getTime();
+  },
+
 ### 返回的login数据
 
     var ResponsePostJson = {
@@ -128,9 +160,43 @@ Request Type: post
             Code: "CodeString" //请求时发送的Code
         }
     }
+    
+或    
 
+    var ResponsePostJson = {
+        Msg:'服务器错误',
+        Status:500,
+        Time: 1483234168570,
+        Data:{
+            RequestTime: "1483234168570",   //请求时发送的 Data.RequestTime
+            Code: "CodeString" //请求时发送的Code
+        }
+    }
     
+或     
+
+    var ResponsePostJson = {
+        Msg:'微信服务器错误[40029:invalid code]',
+        Status:500,
+        Time: 1483234168570,
+        Data:{
+            RequestTime: "1483234168570",   //请求时发送的 Data.RequestTime
+            Code: "CodeString" //请求时发送的Code
+        }
+    }
     
+或当正确未提交Code参数时    
+
+    var ResponsePostJson = {
+        Msg:'登录失败[参数错误]',
+        Status:400,
+        Time: 1483234168570,
+        Data:{
+            RequestTime: "1483234168570",   //请求时发送的 Data.RequestTime
+            //请求时未发送Code
+        }
+    }
+
 ### 各个字段的详细说明
 + Time: 1483260000000    
     每个req和res都有一个Time字段，表示该请求的生成的事情，或者发出的时间
