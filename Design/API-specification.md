@@ -11,7 +11,7 @@ RequestType: post
         Time: 1483234168570,        //发送请求的时间, 在wx.request时调用 getApp().getTimeStamp()获得
         ActionType: "Create",       //必须，可选值有：["Create","Update","Delete"]
         Data: {
-            
+            SessionId: 'asdfasdfasdkfjas;ldfkjwoa;iejfa;',      //通过login API，可以获取一个 SessionId，
             RequestTime: 1483234168270,         //在客户端创建todoitem时生成，调用getApp().getTimeStamp()获得
             Data: [
                 {
@@ -29,7 +29,10 @@ RequestType: post
         },
     }
 
-说明：新增todoitem时，Title为必须项，其他参数可留空；修改todoitem时必须提交Guid，且同时至少提交一个可选项
+说明：    
+新增todoitem时，Title为必须项，其他参数可留空；
+修改todoitem时必须提交Guid，且同时至少提交一个可选项，提交的选项会被更新，空值选项同样会被更新
+
 
 ### 服务端返回的JSON结构 (ResponseToCreateItem)
     var ResponsePostJson = {
@@ -79,8 +82,53 @@ RequestType: post
     }
 说明：API暂不支持一次提交多条记录
 
+###删除记录
+删除todoitem,可以提交多条记录，数据结构如下：
 
-# todolist
+    var RequestPostJson = {
+        Time: 1483234168570,
+        ActionType: "Delete",
+        Data: {
+            SessionId: 'asdfasdfasdkfjas;ldfkjwoa;iejfa;',  
+            RequestTime: 1483234168270, 
+            ActionType: "Delete"
+            Data: [
+                {
+                    Guid":'asdfasdf'
+                },
+                {
+                    Guid":'asasdfasddfasdf'
+                }
+                
+            ]
+        },
+    }
+
+
+###返回的数据结构
+
+
+    var ResponseJson = {
+        Time: 1483234168570,
+        ActionType: "Delete",
+        Data: {
+            RequestTime: 1483234168270, 
+            ActionType: "Delete"
+            Data: [
+                {
+                    Guid":'asdfasdf',       
+                    Delete:1,               //删除成功
+                },
+                {
+                    Guid":'asasdfasddfasdf',
+                    Delete:0,
+                    ErrCode:'GUID_NOT_EXIST',   //错误代码可能有...
+                    ErrMsg:'任务不存在'
+                }
+                
+            ]
+        },
+    }
 
 ### 请求服务器端的todolist数据
 Api: https://todo.aozi.co/api/todolist    
@@ -197,7 +245,9 @@ Request Type: post
         Time: 1483234168570,
         Data:{ 
             RequestTime: "1483234168570",   //请求时发送的 Data.RequestTime
-            Code: "CodeString" //请求时发送的Code
+            Code: "CodeString", //请求时发送的Code
+            SessionId: 'asdfweaj;eoijgad3f1a3dsf46we1f3a2sdf',   //这是一个SessionID，以后每次请求都必须发送SessionId，以确认用户身份
+            Expire:  149551123115483 ,     //毫秒时间  SessionID失效时间
         }
     }  
     
@@ -207,9 +257,11 @@ Request Type: post
         Msg:'服务器错误',
         Status:500,
         Time: 1483234168570,
+        SessionId: 'asdfweaj;eoijgad3f1a3dsf46we1f3a2sdf',
         Data:{
             RequestTime: "1483234168570",   //请求时发送的 Data.RequestTime
-            Code: "CodeString" //请求时发送的Code
+            Code: "CodeString", //请求时发送的Code
+            
         }
     }
     
@@ -220,6 +272,7 @@ Request Type: post
         Msg:'微信服务器错误[40029:invalid code]',
         Status:500,
         Time: 1483234168570,
+        SessionId: 'asdfweaj;eoijgad3f1a3dsf46we1f3a2sdf',
         Data:{
             RequestTime: "1483234168570",   //请求时发送的 Data.RequestTime
             Code: "CodeString" //请求时发送的Code
@@ -232,6 +285,7 @@ Request Type: post
         Msg:'登录失败[参数错误]',
         Status:400,
         Time: 1483234168570,
+        SessionId: 'asdfweaj;eoijgad3f1a3dsf46we1f3a2sdf'
         Data:{
         RequestTime: "1483234168570",   //请求时发送的 Data.RequestTime
                   //请求时未发送Code
@@ -253,7 +307,13 @@ Request Type: post
         403 被禁止的请求    
         404 API不存在；    
         405 拒绝非post请求    
-        
+
++ SessionId: 
+    SessionId由/api/login 返回，应存储于客户端，以后每次请求都应该发送SessionId,以确认用户身份
+    经反复验证发现，小程序不支持Session和Cookie，故SessionID以数据方式发送至客户端。
+    收到SessionID后长应期存储，直到 wx.checkSession 失败时或用户主动退出时应该删除 客户端SessionID
+    微信官方发送的 session_key 有效期为72天，故我们也使用相同有效期的SessionID，但这个SessionID由我们自己服务器生成。
+    
 + Data: {}    
     提交或获取到的数据
             
