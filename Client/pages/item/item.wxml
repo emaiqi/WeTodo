@@ -1,0 +1,30 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="item">
+    <input class='line-input' maxlength="80" placeholder="添加任务标题..." placeholder-style='font-family: "微软雅黑";' bindblur="bindViewTap"/> 
+    <textarea class='content' placeholder="添加任务内容..."/>
+    <radio-group class="radio-group" bindchange="itemLevelChange">
+      <label class="radio">
+        <radio value="1" checked="true"/>一般
+      </label>
+      <label class="radio">
+        <radio value="2"/>重要
+      </label>
+      <label class="radio">
+        <radio value="3"/>紧急
+      </label>
+    </radio-group>
+    <picker bindchange="bindTimeChange" mode='time' start="00:00" end="23:59">
+      <view class="picker">
+        任务时间：{{time}}
+      </view>
+    </picker>
+    <picker bindchange="bindDateChange" mode='date' start="00:00" end="23:59">
+      <view class="picker">
+        任务日期：{{time}}
+      </view>
+    </picker>
+    <button class="s-btn success">确认</button>
+    <button class="s-btn cancel">取消</button>
+  </view>
+</view>

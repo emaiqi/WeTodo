@@ -7,9 +7,9 @@ Page({
   },
   //事件处理函数
   bindViewTap: function() {
-    wx.navigateTo({
-      url: '../item/item'
-    })
+    // wx.navigateTo({
+    //   url: '../logs/logs'
+    // })
     console.log("likai")
   },
   levelChange: function (){
