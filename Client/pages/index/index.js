@@ -10,19 +10,7 @@ Page({
     wx.navigateTo({
       url: '../item/item'
     })
-    console.log("likai")
-  },
-  levelChange: function (){
-
-  },
-  dateChange:function (){
-
-  },
-  bindTimeChange: function (){
-
-  },
-  bindDateChange: function(){
-
+    console.log("离开")
   },
   onLoad: function () {
     console.log('onLoad')
