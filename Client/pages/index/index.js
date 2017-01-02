@@ -3,14 +3,14 @@
 var app = getApp()
 Page({
   data: {
-    motto: 'Hello World wechat',
-    userInfo: {}
+    item: {}
   },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
-      url: '../logs/logs'
+      url: '../item/item'
     })
+    console.log("离开")
   },
   onLoad: function () {
     console.log('onLoad')
