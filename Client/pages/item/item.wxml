@@ -18,7 +18,7 @@
         任务日期：{{date}}
       </view>
     </picker>
-    <button class="s-btn success">确认</button>
+    <button class="s-btn success" bindtap="submitItem">确认</button>
     <button class="s-btn cancel">取消</button>
   </view>
 </view>
