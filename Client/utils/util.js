@@ -74,7 +74,103 @@ function getMonday(){
   }
 }
 
+
+
+
+//Save or Get SessionId; 
+//Usage:
+//  save: sessionId('Here is a session_id string');
+//  get : sessionId();//return 'Here is a session_id string'; 
+function sessionId(){
+    return !arguments.length ? wx.getStorageSync('SESSION_ID'):wx.setStorageSync('SESSION_ID',arguments[0]);
+}
+
+
+//API
+var API_BASE = 'https://todo.aozi.co/api/';
+
+
+//API list
+var APIs = {
+    login: API_BASE+'login',
+    item : API_BASE+'todoitem',
+    list : API_BASE+'todolist'
+};
+
+//封装请求
+//api:APIs item; 
+//actionType string; 
+//data: requestData.Data;
+//f:object{success:fn,fail:fn,complete:fn}
+function R(api,actionType,data,f){
+    var url=APIs[api];
+    var j_req={
+        Time: new Date().getTime(),
+        Data: data
+    };
+    if(api!='login')j_req['SessionId']=sessionId();
+    if(actionType)j_req['ActionType']=actionType;
+    //request 请求参数
+    wx.request({
+        url:url,
+        method:'POST',
+        data:j_req,
+        success:function(r){
+            if('function' == typeof(f.success)){
+                f.success(r);
+            }
+        },
+        fail:function(r){
+            if('function' == typeof(f.fail)){
+                f.fail(r);
+            }
+        },
+        complete:function(r){
+            if('function' == typeof(f.complete)){
+                f.complete(r);
+            }
+        }
+    };);
+}
+
+
+//请求错误的通用处理函数
+function failHandler(){
+    //TODO:统一处理方式 toast,console.log, errorCode_parse etc.
+}
+
+
+//请求成功，返回ErrorCode时的通用处理函数 
+//resData: wx.request 返回的res.data    
+//f.success(resData): 处理返回的数据主题 ：res.data.Data,仅当没有ErrorCode 时生效
+//f.fail(resData): 需要在通用处理方式完成错误信息处理后，进行个性错误时使用
+//f.complete(resData): 
+function sucHandler(resDate,f){
+    //如果返回Status不是200，即有ErrorCode时通用处理方式
+    if('undefined' == typeof(resData.ErrorCode) || '200' != resData.Status){
+        wx.toast({
+            icon:'warn',
+            title:'undefined'==resData.Msg?'操作失败':resData.Msg,
+            duration:2000
+        });
+        
+        if('function' == typeof(f.fail)){
+            f.fail(resData);
+        }
+    }else if('function' == typeof(f.success)){
+        f.success(resData);
+    }
+    
+    if('function' == typeof(f.complete)){
+        f.complete(resData);
+    }
+}
+
+
+
 module.exports = {
   formatTime: formatTime,
-  timespan2LocalTime: timespan2LocalTime
+  timespan2LocalTime: timespan2LocalTime,
+  sessionId: sessionId,
+  
 }
