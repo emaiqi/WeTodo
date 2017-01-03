@@ -1,31 +1,20 @@
 /**app.wxss**/
 .container {
-  height: 100%;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   padding: 30rpx 30rpx;
   box-sizing: border-box;
-  font-family: "微软雅黑"
-}
-
-page{
-  background-color: #efefef; 
+  font-family: "微软雅黑";
 }
 
 .line-input{
-  border-bottom: 1rpx solid #525252;
   font-size: 17pt;
   margin-bottom: 20rpx;
   font-family: "微软雅黑"
 }
 
 .content{
-  border: 1rpx solid #525252;
-  height: 750rpx;
   display: block;
   width: 100%;
-  border-radius: 5rpx;
 }
 
 .radio-group{
@@ -37,12 +26,14 @@ picker{
   margin:20rpx 0;
 }
 
-.s-btn{
+.text-btn{
   min-width: 10rpx;
   display: inline-block;
   margin-right: 30rpx;
   font-size: 13pt;
-  padding: 0rpx 40rpx;
+  padding: 10rpx 20rpx;
+  float: right;
+  line-height: 13pt;
 }
 
 .success{
@@ -52,4 +43,29 @@ picker{
 
 .success:active{
   opacity: 0.2
+}
+
+.title{
+  font-size: 18pt;
+}
+
+.button{
+  height:48rpx;
+  width: 48rpx;
+  padding: 3rpx;
+  float: right;
+  margin-right: 18rpx;
+  margin-top: 18rpx;
+  border-radius: 5rpx;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.button:hover{
+  box-shadow: 0rpx 0rpx 4rpx #999;
+}
+
+.button:active{
+  box-shadow: 0rpx 0rpx 4rpx #000;
 }
