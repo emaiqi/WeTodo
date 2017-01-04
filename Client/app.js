@@ -68,6 +68,7 @@ function login(){
             // header: {}, // 设置请求的 header
           success: function(res){
             if(res.data.ErrorCode===undefined){
+              console.log(res.data);
               console.log("登陆成功");
             }else{
               var err = new Error();
@@ -75,6 +76,14 @@ function login(){
               err.name = res.data.ErrorCode
               throw(err)
             }
+          },
+          fail: function(res) {
+            // fail
+            console.log(res)
+          },
+          complete: function(res) {
+            // complete
+            console.log(res)
           }
         })
       } else {
