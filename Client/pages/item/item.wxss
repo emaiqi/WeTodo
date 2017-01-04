@@ -13,6 +13,7 @@
 
 .bottom{
   bottom: 0rpx;
+  box-shadow: 0rpx -5rpx 5rpx #999;
 }
 
 .top{
@@ -29,6 +30,14 @@
 
 .icon-remind{
   background-image:url("../../images/remind.png");
+}
+
+.icon-add{
+  background-image:url("../../images/add.png");
+}
+
+.icon-detail{
+  background-image:url("../../images/detail.png");
 }
 
 .modal-bg{

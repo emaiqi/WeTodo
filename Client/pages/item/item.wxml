@@ -38,6 +38,7 @@
   </view>
 </view>
 <view class="bottom nav">
-  
+  <view class='button icon-add'></view>
+  <view class='button icon-detail'></view>
 </view>
 

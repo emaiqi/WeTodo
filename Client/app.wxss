@@ -60,9 +60,6 @@ picker{
   background-size: auto 100%;
   background-repeat: no-repeat;
   background-position: center;
-}
-
-.button:hover{
   box-shadow: 0rpx 0rpx 4rpx #999;
 }
 
