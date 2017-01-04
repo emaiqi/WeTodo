@@ -5,3 +5,12 @@
   box-shadow: 0 0 4rpx #333;
   padding: 20rpx;
 }
+
+.new-item{
+  border: 2rpx dashed #b2b2b2;
+  border-radius: 10rpx;
+  color: #b2b2b2;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+}

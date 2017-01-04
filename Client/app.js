@@ -5,6 +5,28 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
+    // wx.request({
+    //   url: 'https://todo.aozi.co/api/todoitem',
+    //   data: req,
+    //   method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+    //   // header: {}, // 设置请求的 header
+    //   success: function(res){
+    //     // success
+    //     wx.showToast({
+    //       title: '成功',
+    //       icon: 'success',
+    //       duration: 2000
+    //     })
+    //   },
+    //   fail: function(res) {
+    //     // fail
+    //     console.log(res)
+    //   },
+    //   complete: function(res) {
+    //     // complete
+    //     console.log(res)
+    //   }
+    // })
   },
   getUserInfo:function(cb){
     var that = this;

@@ -1,6 +1,24 @@
 <!--index.wxml-->
+<view class="top nav">
+  <view class='button icon-remind'></view>
+  <!--<view class='button icon-hand' bindtap="showModal"></view>-->
+  <view class='button icon-up'></view>
+</view>
 <view class="container">
-  <view class="item">
-    <button bindtap="bindViewTap">详情</button>
+  <view wx:if="{{items.length>0}}">
+    <view class="item" wx:for="{{items}}">
+      <text>{{item.title}}</text>
+      <text>{{item.content}}</text>
+      <text>{{item.date + " " + item.time}}</text>
+    </view>
   </view>
+  <view wx:else>
+    <view class='new-item' bindtap="bindViewTap">
+      + 新建事件
+    </view>
+  </view>
+</view>
+<view class="bottom nav">
+  <view class='button icon-add' bindtap="bindViewTap"></view>
+  <view class='button icon-detail'></view>
 </view>

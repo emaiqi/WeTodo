@@ -66,3 +66,45 @@ picker{
 .button:active{
   box-shadow: 0rpx 0rpx 4rpx #000;
 }
+
+.nav{
+  height: 90rpx;
+  box-shadow: 0rpx 5rpx 5rpx #999;
+  position: fixed;
+  width: 100%;
+  background-color: #fff;
+  z-index: 100;
+}
+
+.container{
+  margin-top: 90rpx;
+}
+
+.bottom{
+  bottom: 0rpx;
+  box-shadow: 0rpx -5rpx 5rpx #999;
+}
+
+.top{
+  top:0rpx;
+}
+
+.icon-hand{
+  background-image:url("../../images/hand.png");
+}
+
+.icon-up{
+  background-image:url("../../images/up.png");
+}
+
+.icon-remind{
+  background-image:url("../../images/remind.png");
+}
+
+.icon-add{
+  background-image:url("../../images/add.png");
+}
+
+.icon-detail{
+  background-image:url("../../images/detail.png");
+}
