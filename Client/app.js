@@ -5,6 +5,7 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
+    login();
     // wx.request({
     //   url: 'https://todo.aozi.co/api/todoitem',
     //   data: req,
@@ -51,5 +52,27 @@ App({
   }
 })
 
+
+function login(){
+  wx.request({
+    url: 'https://todo.aozi.co/api/login',
+    data: {
+      Time: new Date().getTime(),
+      Data: {
+          RequestTime: new Date().getTime(),
+          Code:'CodeString-get-from-wx.login'
+      }
+    },
+    method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+    success: function(res){
+      if(res.data.ErrorCode===undefined){
+        console.log("登陆成功");
+      }else{
+        console.log("失败:errCode:"+res.data.ErrorCode+",status:"+res.data.Status+",msg:"+res.data.Msg)
+      }
+    }
+  })
+}
 
 
