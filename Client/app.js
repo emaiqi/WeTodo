@@ -69,7 +69,10 @@ function login(){
       if(res.data.ErrorCode===undefined){
         console.log("登陆成功");
       }else{
-        console.log("失败:errCode:"+res.data.ErrorCode+",status:"+res.data.Status+",msg:"+res.data.Msg)
+        var err = new Error();
+        err.message = "失败:status:"+res.data.Status+",msg:"+res.data.Msg;
+        err.name = res.data.ErrorCode
+        throw(err)
       }
     }
   })
