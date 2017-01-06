@@ -130,7 +130,7 @@ function R(api,actionType,data,f){
                 f.complete(r);
             }
         }
-    };);
+    });
 }
 
 
